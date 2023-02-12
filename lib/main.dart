@@ -13,27 +13,20 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-        providers: [
-          ChangeNotifierProvider<HomeVM>(
-              create: (_) => HomeVM()),
-          ChangeNotifierProvider<AuthVM>(
-              create: (_) => AuthVM()),
-        ],
-        child: ScreenUtilInit(
-          designSize: const Size(375, 861),
-          builder: (context, _) {
-            return MaterialApp(
-              debugShowCheckedModeBanner: false,
-              routes: AppRoutes.getAll(),
-              title: 'Flutter Demo',
-              theme: ThemeData(
-                primarySwatch: Colors.blue,
-              ),
-              home: const HomeScreen(),
-            );
-          },
-        ));
+    return ScreenUtilInit(
+      designSize: const Size(375, 861),
+      builder: (context, _) {
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          routes: AppRoutes.getAll(),
+          title: 'Flutter Demo',
+          theme: ThemeData(
+            primarySwatch: Colors.blue,
+          ),
+          home: DashboardScreen(),
+        );
+      },
+    );
   }
 }
 

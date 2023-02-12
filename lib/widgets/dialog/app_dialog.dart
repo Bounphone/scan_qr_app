@@ -1,4 +1,4 @@
-import 'package:flutter_blueprint/packages.dart';
+import '../../packages.dart';
 
 class AppDialog extends StatelessWidget {
   String message;

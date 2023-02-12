@@ -1,5 +1,5 @@
-<h1 align="center">Hi 👋, Handsome and beautiful developers Welcome to Flutter Blueprint</h1>
-<h3 align="center">"Flutter Blueprint is a project that introduces MVVM architecture and project structure approaches to developing Flutter apps".</h3>
+<h1 align="center">Hi 👋, Handsome and beautiful developers Welcome to Scan QR</h1>
+<h3 align="center">"Scan QR is a project that introduces MVVM architecture and project structure approaches to developing Flutter apps".</h3>
 
 # Note
 
