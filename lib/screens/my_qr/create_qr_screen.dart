@@ -1,5 +1,5 @@
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:scan_qr_app/packages.dart';
+
 
 class CreateQRScreen extends StatefulWidget {
   CreateQRScreen({super.key});
@@ -94,7 +94,17 @@ class _CreateQRScreenState extends State<CreateQRScreen> {
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(0))),
             onPressed: () {
-              if (_formKey.currentState!.validate()) {}
+              if (_formKey.currentState!.validate()) {
+                double lat = 0;
+                double long = 0;
+                if (isOpenLocation) {
+                  lat = _center.latitude;
+                  long = _center.longitude;
+                }
+                context
+                    .read<MyQRVM>()
+                    .onCreateQR(qrName.text.trim(), lat, long);
+              }
             },
             child: Text('ສ້າງ QR'),
           )),

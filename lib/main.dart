@@ -1,3 +1,6 @@
+import 'package:scan_qr_app/view_models/auth_vm.dart';
+import 'package:scan_qr_app/view_models/my_qr_vm.dart';
+
 import 'packages.dart';
 
 void main() async {
@@ -13,19 +16,22 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ScreenUtilInit(
-      designSize: const Size(375, 861),
-      builder: (context, _) {
-        return MaterialApp(
-          debugShowCheckedModeBanner: false,
-          routes: AppRoutes.getAll(),
-          title: 'Flutter Demo',
-          theme: ThemeData(
-            primarySwatch: Colors.blue,
-          ),
-          home: DashboardScreen(),
-        );
-      },
+    return MultiProvider(
+      providers: [ChangeNotifierProvider<AuthVM>(create: (_) => AuthVM()), ChangeNotifierProvider<MyQRVM>(create: (_) => MyQRVM())],
+      child: ScreenUtilInit(
+        designSize: const Size(375, 861),
+        builder: (context, _) {
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            routes: AppRoutes.getAll(),
+            title: 'Flutter Demo',
+            theme: ThemeData(
+              primarySwatch: Colors.blue,
+            ),
+            home: LoginScreen(),
+          );
+        },
+      ),
     );
   }
 }

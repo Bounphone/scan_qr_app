@@ -37,3 +37,8 @@ export 'package:scan_qr_app/screens/my_qr/my_qr_screeen.dart';
 export 'package:scan_qr_app/screens/my_qr/list_my_qr_screen.dart';
 export 'package:scan_qr_app/models/profile/profile_service_model.dart';
 export 'package:qr_flutter/qr_flutter.dart';
+export 'package:scan_qr_app/models/auth/auth_model.dart';
+export 'package:scan_qr_app/services/auth_service.dart';
+export 'package:jwt_decode/jwt_decode.dart';
+export 'package:scan_qr_app/view_models/my_qr_vm.dart';
+export 'package:google_maps_flutter/google_maps_flutter.dart';

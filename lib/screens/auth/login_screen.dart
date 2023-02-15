@@ -1,3 +1,5 @@
+import 'package:scan_qr_app/view_models/auth_vm.dart';
+
 import '../../packages.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -62,7 +64,8 @@ class LoginScreen extends StatelessWidget {
                       style: ElevatedButton.styleFrom(),
                       onPressed: () async {
                         if (_formKey.currentState!.validate()) {
-                          Navigator.pushNamed(context, AppRoutes.dashboard);
+                          context.read<AuthVM>().onLogin(
+                              email.text.trim(), password.text.trim(), context);
                         }
                       },
                       child: Text(
@@ -78,9 +81,7 @@ class LoginScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       GestureDetector(
-                        onTap: () {
-                          // Navigator.pushNamed(context, AppRoute.forgotPassword);
-                        },
+                        onTap: () {},
                         child: Text(
                           'ລືມລະຫັດຜ່ານ',
                           style: TextStyle(
