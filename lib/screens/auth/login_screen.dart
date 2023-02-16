@@ -2,17 +2,37 @@ import 'package:scan_qr_app/view_models/auth_vm.dart';
 
 import '../../packages.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   LoginScreen({super.key});
 
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
+
   TextEditingController email = TextEditingController();
+
   TextEditingController password = TextEditingController();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    context.read<AuthVM>().checkValidToken(context);
+  }
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+          title: Text('ເຂົ້າສູ່ລະບົບ'),
+          backgroundColor: AppColors.BASE_COLOR,
+          elevation: 0,
+          centerTitle: true,
+        ),
         body: Padding(
           padding: EdgeInsets.symmetric(horizontal: 20.w),
           child: Form(
@@ -22,16 +42,16 @@ class LoginScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(
-                    height: 25.h,
-                  ),
-                  Text(
-                    'ເຂົ້າສູ່ລະບົບ',
-                    style:
-                        TextStyle(fontWeight: FontWeight.w600, fontSize: 25.sp),
-                  ),
-                  SizedBox(
                     height: 35.h,
                   ),
+                  // Text(
+                  //   'ເຂົ້າສູ່ລະບົບ',
+                  //   style:
+                  //       TextStyle(fontWeight: FontWeight.w600, fontSize: 25.sp),
+                  // ),
+                  // SizedBox(
+                  //   height: 35.h,
+                  // ),
                   CustomFormField(
                     hintText: 'ອີເມລ',
                     validator: (val) {
@@ -61,7 +81,8 @@ class LoginScreen extends StatelessWidget {
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(),
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: AppColors.BASE_COLOR),
                       onPressed: () async {
                         if (_formKey.currentState!.validate()) {
                           context.read<AuthVM>().onLogin(
@@ -74,28 +95,9 @@ class LoginScreen extends StatelessWidget {
                       ),
                     ),
                   ),
+
                   SizedBox(
-                    height: 20.h,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      GestureDetector(
-                        onTap: () {},
-                        child: Text(
-                          'ລືມລະຫັດຜ່ານ',
-                          style: TextStyle(
-                              fontSize: 12.sp,
-                              decoration: TextDecoration.underline),
-                        ),
-                      ),
-                      SizedBox(
-                        width: 10.w,
-                      )
-                    ],
-                  ),
-                  SizedBox(
-                    height: 50.h,
+                    height: 70.h,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -117,15 +119,6 @@ class LoginScreen extends StatelessWidget {
                       )
                     ],
                   ),
-                  SizedBox(
-                    height: 160.h,
-                  ),
-                  // Center(
-                  //     child: Text('Power by CEIT-IoT',
-                  //         style: TextStyle(fontSize: 14.sp))),
-                  SizedBox(
-                    height: 25.h,
-                  )
                 ],
               ),
             ),

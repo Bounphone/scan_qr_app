@@ -1,21 +1,21 @@
 import 'dart:convert';
 
-MyQrModel myQrModelFromJson(String str) => MyQrModel.fromJson(json.decode(str));
+GetMyQrModel getMyQrModelFromJson(String str) => GetMyQrModel.fromJson(json.decode(str));
 
-String myQrModelToJson(MyQrModel data) => json.encode(data.toJson());
+String getMyQrModelToJson(GetMyQrModel data) => json.encode(data.toJson());
 
-class MyQrModel {
-    MyQrModel({
+class GetMyQrModel {
+    GetMyQrModel({
         required this.status,
         required this.data,
     });
 
     String status;
-    List<Data> data;
+    List<Datum> data;
 
-    factory MyQrModel.fromJson(Map<String, dynamic> json) => MyQrModel(
+    factory GetMyQrModel.fromJson(Map<String, dynamic> json) => GetMyQrModel(
         status: json["status"],
-        data: List<Data>.from(json["data"].map((x) => Data.fromJson(x))),
+        data: List<Datum>.from(json["data"].map((x) => Datum.fromJson(x))),
     );
 
     Map<String, dynamic> toJson() => {
@@ -24,12 +24,14 @@ class MyQrModel {
     };
 }
 
-class Data {
-    Data({
+class Datum {
+    Datum({
         required this.id,
         required this.name,
         required this.qrCode,
         required this.createdBy,
+        required this.latitude,
+        required this.longtitude,
         required this.createdAt,
         required this.updatedAt,
         required this.v,
@@ -39,15 +41,19 @@ class Data {
     String name;
     String qrCode;
     String createdBy;
+    dynamic latitude;
+    dynamic longtitude;
     DateTime createdAt;
     DateTime updatedAt;
     int v;
 
-    factory Data.fromJson(Map<String, dynamic> json) => Data(
+    factory Datum.fromJson(Map<String, dynamic> json) => Datum(
         id: json["_id"],
         name: json["name"],
         qrCode: json["qrCode"],
         createdBy: json["createdBy"],
+        latitude: json["latitude"],
+        longtitude: json["longtitude"],
         createdAt: DateTime.parse(json["createdAt"]),
         updatedAt: DateTime.parse(json["updatedAt"]),
         v: json["__v"],
@@ -58,6 +64,8 @@ class Data {
         "name": name,
         "qrCode": qrCode,
         "createdBy": createdBy,
+        "latitude": latitude,
+        "longtitude": longtitude,
         "createdAt": createdAt.toIso8601String(),
         "updatedAt": updatedAt.toIso8601String(),
         "__v": v,

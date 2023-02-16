@@ -1,3 +1,4 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:scan_qr_app/models/auth/access_token_model.dart';
 import 'package:scan_qr_app/packages.dart';
 import 'package:scan_qr_app/view_models/auth_vm.dart';
@@ -16,7 +17,10 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<AuthVM>(builder: (context, model, _) {
-      AccessTokenModel accessTokenModel = model.getAccessTokenModel!;
+      String accessToken = model.getAccessToken ?? '';
+      Map<String, dynamic> decodedToken = Jwt.parseJwt(accessToken);
+      AccessTokenModel accessTokenModel =
+          accessTokenModelFromJson(jsonEncode(decodedToken));
       return Scaffold(
         appBar: AppBar(
           title: Text('ຂໍ້ມູນສ່ວນບຸກຄົນ'),
@@ -72,7 +76,25 @@ class ProfileScreen extends StatelessWidget {
                     primary: Color(0xFFf4f5f6),
                   ),
                   onPressed: () {
-                    // dialogLogout(context);
+                    AwesomeDialog(
+                        context: context,
+                        animType: AnimType.scale,
+                        dialogType: DialogType.question,
+                        body: Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 15.w),
+                          child: Text(
+                            'ທ່ານຕ້ອງການອອກຈາກລະບົບບໍ?',
+                            style: TextStyle(
+                                fontStyle: FontStyle.italic, fontSize: 14.sp),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                        btnOkOnPress: () {
+                          Navigator.pushNamedAndRemoveUntil(
+                              context, AppRoutes.login, (route) => false);
+                        },
+                        btnCancelOnPress: () {})
+                      ..show();
                   },
                   child: Row(
                     children: [

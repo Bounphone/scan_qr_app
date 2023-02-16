@@ -11,7 +11,6 @@ class _ScanQRScreenState extends State<ScanQRScreen> {
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
   Barcode? result;
   QRViewController? controller;
-  Position? position;
 
   @override
   void reassemble() {
@@ -21,22 +20,22 @@ class _ScanQRScreenState extends State<ScanQRScreen> {
   }
 
   @override
-  void initState() {
-    super.initState();
-    Geolocator.getLastKnownPosition().then((value) {
-      setState(() {
-        position = value;
-      });
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Scan QR Code'),
+        title: Text('ເຊັກອີນ'),
         backgroundColor: AppColors.BASE_COLOR,
         elevation: 0,
+        actions: [
+          IconButton(
+              onPressed: () {
+                Navigator.pushReplacementNamed(context, AppRoutes.scanQRHistory);
+              },
+              icon: Icon(
+                Icons.history,
+                color: Colors.orange,
+              ))
+        ],
       ),
       backgroundColor: AppColors.BASE_COLOR,
       body: SingleChildScrollView(
@@ -54,8 +53,14 @@ class _ScanQRScreenState extends State<ScanQRScreen> {
                     borderRadius: BorderRadius.circular(15.r)),
                 padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 30.h),
                 child: Column(children: [
-                  Icon(Icons.document_scanner_sharp, size: (60.h + 60.w) / 2, color: Colors.orange,),
-                  SizedBox(height: 20.h,),
+                  Icon(
+                    Icons.document_scanner_sharp,
+                    size: (60.h + 60.w) / 2,
+                    color: Colors.orange,
+                  ),
+                  SizedBox(
+                    height: 20.h,
+                  ),
                   Text(
                     'Scanning our standard QR code is a quick and easy way to access valuable information and services.',
                     style: TextStyle(fontSize: 14.sp, color: Colors.grey),
@@ -76,7 +81,12 @@ class _ScanQRScreenState extends State<ScanQRScreen> {
                         controller.scannedDataStream.listen((scanData) async {
                           result = scanData;
                           if (result != null) {
-                            if (result!.code!.isNotEmpty) {}
+                            if (result!.code!.isNotEmpty) {
+                              controller.pauseCamera();
+                              context
+                                  .read<CheckInVM>()
+                                  .onCheckIn(context, result!.code!);
+                            }
                           }
                         });
                       },
@@ -88,42 +98,15 @@ class _ScanQRScreenState extends State<ScanQRScreen> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 20.h,)
+                  SizedBox(
+                    height: 20.h,
+                  )
                 ]),
               ),
             ),
           ],
         ),
       ),
-      // body: Stack(
-      //   children: [
-      //     Column(
-      //       children: [
-      //         Expanded(
-      // child: QRView(
-      //   key: qrKey,
-      //   onQRViewCreated: (QRViewController controller) {
-      //     this.controller = controller;
-      //     controller.resumeCamera();
-      //     controller.scannedDataStream.listen((scanData) async {
-      //       result = scanData;
-      //       if (result != null) {
-      //         if (result!.code!.isNotEmpty) {}
-      //       }
-      //     });
-      //   },
-      //   overlay: QrScannerOverlayShape(
-      //       borderColor: Colors.white,
-      //       borderLength: 20,
-      //       borderRadius: 15.r,
-      //       borderWidth: 10,
-      //       cutOutSize: MediaQuery.of(context).size.width * 0.75),
-      // ),
-      //         ),
-      //       ],
-      //     ),
-      //   ],
-      // ),
     );
   }
 

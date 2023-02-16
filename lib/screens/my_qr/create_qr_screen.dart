@@ -1,6 +1,5 @@
 import 'package:scan_qr_app/packages.dart';
 
-
 class CreateQRScreen extends StatefulWidget {
   CreateQRScreen({super.key});
 
@@ -103,7 +102,7 @@ class _CreateQRScreenState extends State<CreateQRScreen> {
                 }
                 context
                     .read<MyQRVM>()
-                    .onCreateQR(qrName.text.trim(), lat, long);
+                    .onCreateQR(qrName.text.trim(), lat, long, context);
               }
             },
             child: Text('ສ້າງ QR'),

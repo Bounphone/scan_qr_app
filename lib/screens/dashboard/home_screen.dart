@@ -1,9 +1,12 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:scan_qr_app/packages.dart';
 
 class HomeScreen extends StatelessWidget {
   List<AppServiceModel> appService = [
     AppServiceModel(
-        icon: Icons.document_scanner_sharp, routeName: AppRoutes.scanQR, title: 'Scan QR'),
+        icon: Icons.document_scanner_sharp,
+        routeName: AppRoutes.scanQR,
+        title: 'Check In'),
     AppServiceModel(
         icon: Icons.qr_code, routeName: AppRoutes.listMyQR, title: 'My QR'),
   ];
@@ -19,7 +22,25 @@ class HomeScreen extends StatelessWidget {
         actions: [
           IconButton(
               onPressed: () async {
-                Navigator.pushNamed(context, AppRoutes.login);
+                AwesomeDialog(
+                    context: context,
+                    animType: AnimType.scale,
+                    dialogType: DialogType.question,
+                    body: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 15.w),
+                      child: Text(
+                        'ທ່ານຕ້ອງການອອກຈາກລະບົບບໍ?',
+                        style: TextStyle(
+                            fontStyle: FontStyle.italic, fontSize: 14.sp),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                    btnOkOnPress: () {
+                      Navigator.pushNamedAndRemoveUntil(
+                          context, AppRoutes.login, (route) => false);
+                    },
+                    btnCancelOnPress: () {})
+                  ..show();
               },
               icon: Icon(
                 Icons.logout,
