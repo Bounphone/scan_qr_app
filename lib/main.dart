@@ -1,5 +1,4 @@
-import 'package:scan_qr_app/view_models/auth_vm.dart';
-import 'package:scan_qr_app/view_models/my_qr_vm.dart';
+
 
 import 'packages.dart';
 
@@ -17,7 +16,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [ChangeNotifierProvider<AuthVM>(create: (_) => AuthVM()), ChangeNotifierProvider<MyQRVM>(create: (_) => MyQRVM())],
+      providers: [
+        ChangeNotifierProvider<AuthVM>(create: (_) => AuthVM()),
+        ChangeNotifierProvider<MyQRVM>(create: (_) => MyQRVM()),
+        ChangeNotifierProvider<CheckInVM>(create: (_) => CheckInVM())
+      ],
       child: ScreenUtilInit(
         designSize: const Size(375, 861),
         builder: (context, _) {

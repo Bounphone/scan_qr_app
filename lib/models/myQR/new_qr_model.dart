@@ -29,6 +29,8 @@ class Data {
         required this.name,
         required this.qrCode,
         required this.createdBy,
+        required this.latitude,
+        required this.longtitude,
         required this.id,
         required this.createdAt,
         required this.updatedAt,
@@ -38,6 +40,8 @@ class Data {
     String name;
     String qrCode;
     String createdBy;
+    dynamic latitude;
+    dynamic longtitude;
     String id;
     DateTime createdAt;
     DateTime updatedAt;
@@ -47,6 +51,8 @@ class Data {
         name: json["name"],
         qrCode: json["qrCode"],
         createdBy: json["createdBy"],
+        latitude: json["latitude"],
+        longtitude: json["longtitude"],
         id: json["_id"],
         createdAt: DateTime.parse(json["createdAt"]),
         updatedAt: DateTime.parse(json["updatedAt"]),
@@ -57,6 +63,8 @@ class Data {
         "name": name,
         "qrCode": qrCode,
         "createdBy": createdBy,
+        "latitude": latitude,
+        "longtitude": longtitude,
         "_id": id,
         "createdAt": createdAt.toIso8601String(),
         "updatedAt": updatedAt.toIso8601String(),

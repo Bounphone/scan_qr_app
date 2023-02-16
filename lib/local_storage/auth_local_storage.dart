@@ -16,19 +16,12 @@ class AuthLocalStorage {
     }
   }
 
-  Future<AccessTokenModel?> getAccessToken() async {
+  Future<String?> getAccessToken() async {
     try {
       final box = await Hive.openBox(boxName);
       final accessToken = box.get(accessTokenKey);
       await box.close();
-      if (accessToken != null) {
-        Map<String, dynamic> decodedToken = Jwt.parseJwt(accessToken);
-        AccessTokenModel accessTokenModel =
-            accessTokenModelFromJson(jsonEncode(decodedToken));
-        return accessTokenModel;
-      } else {
-        return null;
-      }
+      return accessToken;
     } catch (e) {
       rethrow;
     }

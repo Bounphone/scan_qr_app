@@ -33,8 +33,8 @@ class Data {
     required this.qrId,
     required this.checkInDate,
     required this.userId,
-    required this.lat,
-    required this.long,
+    required this.latitude,
+    required this.longtitude,
     required this.v,
   });
 
@@ -42,8 +42,8 @@ class Data {
   String qrId;
   DateTime checkInDate;
   String userId;
-  int lat;
-  int long;
+  dynamic latitude;
+  dynamic longtitude;
   int v;
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
@@ -51,8 +51,8 @@ class Data {
         qrId: json["qrId"],
         checkInDate: DateTime.parse(json["checkInDate"]),
         userId: json["userId"],
-        lat: json["lat"],
-        long: json["long"],
+        latitude: json["latitude"],
+        longtitude: json["longtitude"],
         v: json["__v"],
       );
 
@@ -61,8 +61,8 @@ class Data {
         "qrId": qrId,
         "checkInDate": checkInDate.toIso8601String(),
         "userId": userId,
-        "lat": lat,
-        "long": long,
+        "latitude": latitude,
+        "longtitude": longtitude,
         "__v": v,
       };
 }

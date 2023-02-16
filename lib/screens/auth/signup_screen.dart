@@ -12,6 +12,12 @@ class SignUpScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text('ລົງທະບຽນ'),
+        backgroundColor: AppColors.BASE_COLOR,
+        elevation: 0,
+        centerTitle: true,
+      ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 20.w),
         child: Form(
@@ -93,9 +99,18 @@ class SignUpScreen extends StatelessWidget {
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColors.BASE_COLOR,
+                    ),
                     onPressed: () async {
-                      if (_formKey.currentState!.validate()) {}
+                      if (_formKey.currentState!.validate()) {
+                        context.read<AuthVM>().onSignUp(
+                            firstName.text.trim(),
+                            surname.text.trim(),
+                            email.text.trim(),
+                            password.text.trim(),
+                            context);
+                      }
                     },
                     child: Text(
                       'ລົງທະບຽນ',

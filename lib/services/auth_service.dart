@@ -6,9 +6,10 @@ class AuthService {
       String url = dotenv.env['USERS_LOGIN'] ?? '';
       final Dio dio = Dio();
       String payload = jsonEncode({'email': email, 'password': password});
-      Response response = await dio.post(url, data: payload);
+      Response response = await dio.post(url, data: payload,
+          options: Options(headers: {'Content-Type': 'application/json'}));
       return authModelFromJson(jsonEncode(response.data));
-    } catch (e) {
+    } on DioError catch (e) {
       rethrow;
     }
   }
@@ -19,7 +20,8 @@ class AuthService {
       String url = dotenv.env['USERS_LOGIN'] ?? '';
       final Dio dio = Dio();
       String payload = jsonEncode({'email': email, 'password': password});
-      Response response = await dio.post(url, data: payload);
+      Response response = await dio.post(url, data: payload,
+          options: Options(headers: {'Content-Type': 'application/json'}));
       return authModelFromJson(jsonEncode(response.data));
     } catch (e) {
       rethrow;

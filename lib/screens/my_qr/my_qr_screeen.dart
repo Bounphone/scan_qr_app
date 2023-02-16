@@ -1,12 +1,15 @@
 import 'package:flutter/services.dart';
+import 'package:scan_qr_app/models/myQR/my_qr_arg.dart';
 import 'package:scan_qr_app/packages.dart';
 
 class MyQRScreen extends StatelessWidget {
-   MyQRScreen({super.key});
-   final String qrData = '12345';
+  MyQRScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final args = ModalRoute.of(context)!.settings.arguments as MyQRArg;
+    String name = args.name;
+    String qrCode = args.qrCode;
     return Scaffold(
       appBar: AppBar(
         title: Text('My QR Code'),
@@ -24,7 +27,7 @@ class MyQRScreen extends StatelessWidget {
               ),
               Center(
                 child: Text(
-                  'My Organization QR',
+                  name,
                   style:
                       TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w600),
                 ),
@@ -33,7 +36,7 @@ class MyQRScreen extends StatelessWidget {
                 height: 60.h,
               ),
               QrImage(
-                data: qrData,
+                data: qrCode,
                 version: QrVersions.auto,
                 size: MediaQuery.of(context).size.width * 0.7,
               ),
@@ -41,11 +44,15 @@ class MyQRScreen extends StatelessWidget {
                 height: 80.h,
               ),
               ElevatedButton(
-                style: ElevatedButton.styleFrom(padding: EdgeInsets.symmetric(vertical: 15.h, ), shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15.r)
-                )),
+                  style: ElevatedButton.styleFrom(
+                      padding: EdgeInsets.symmetric(
+                        vertical: 15.h,
+                      ),
+                      backgroundColor: AppColors.BASE_COLOR,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15.r))),
                   onPressed: () {
-                    Clipboard.setData(ClipboardData(text: qrData));
+                    Clipboard.setData(ClipboardData(text: qrCode));
                   },
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -54,7 +61,9 @@ class MyQRScreen extends StatelessWidget {
                         Icons.copy,
                         size: 20.sp,
                       ),
-                      SizedBox(width: 15.w,),
+                      SizedBox(
+                        width: 15.w,
+                      ),
                       Text(
                         'Copy QR Code',
                         style: TextStyle(fontSize: 13.sp),
