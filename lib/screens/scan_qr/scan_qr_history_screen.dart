@@ -26,12 +26,22 @@ class ScanQRHistoryScreen extends StatelessWidget {
                 style: TextStyle(fontSize: 14.sp),
               );
             } else {
+              if (model.getCheckInModel!.data.length < 1) {
+                return Center(
+                  child: Text(
+                    'ບໍ່ພົບລາຍການເຊັກອິນຂອງທ່ານ',
+                    style: TextStyle(fontSize: 14.sp),
+                  ),
+                );
+              }
+
               return Padding(
                 padding: EdgeInsets.only(left: 15.w, right: 15.w, top: 15.h),
                 child: ListView.separated(
                   itemCount: model.getCheckInModel!.data.length,
                   itemBuilder: (context, index) {
-                    check_in.Data data = model.getCheckInModel!.data[index];
+                    check_in.Data data = model.getCheckInModel!
+                        .data[model.getCheckInModel!.data.length - 1 - index];
 
                     String id = data.id;
                     String qrID = data.qrId;
