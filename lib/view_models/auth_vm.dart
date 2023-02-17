@@ -51,8 +51,24 @@ class AuthVM extends ChangeNotifier {
       final accessToken = loginRes.token;
       await AuthLocalStorage().setAccessToken(accessToken);
       _accessToken = accessToken;
-      Navigator.pushNamedAndRemoveUntil(
+      AwesomeDialog(
+          context: context,
+          animType: AnimType.scale,
+          dialogType: DialogType.warning,
+          body: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 15.w),
+            child: Text(
+              'ລົງທະບຽນສຳເລັດແລ້ວ',
+              style: TextStyle(fontStyle: FontStyle.italic, fontSize: 14.sp),
+              textAlign: TextAlign.center,
+            ),
+          ),
+          btnOkOnPress: () {
+             Navigator.pushNamedAndRemoveUntil(
           context, AppRoutes.dashboard, (route) => false);
+          })
+        ..show();
+     
     } on DioError catch (e) {
       Navigator.pop(context);
       String message = e.message ?? 'Error';
@@ -87,9 +103,18 @@ class AuthVM extends ChangeNotifier {
           _accessToken = accessToken;
           Navigator.pushReplacementNamed(context, AppRoutes.dashboard);
         }
-      } 
+      }
     } catch (e) {
       rethrow;
     }
+  }
+
+  Future<void> onLogout() async {
+    try {
+      await AuthLocalStorage().clearBox();
+    } catch (e) {
+      rethrow;
+    }
+    notifyListeners();
   }
 }

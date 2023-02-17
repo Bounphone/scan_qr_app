@@ -38,6 +38,14 @@ class _ListMyQRScreenState extends State<ListMyQRScreen> {
                 style: TextStyle(fontSize: 14.sp),
               );
             } else {
+              if (model.getMyQrModel!.data.length < 1) {
+                return Center(
+                  child: Text(
+                    'ບໍ່ພົບລາຍການ QR ຂອງທ່ານ',
+                    style: TextStyle(fontSize: 14.sp),
+                  ),
+                );
+              }
               return Padding(
                 padding: EdgeInsets.only(left: 15.w, right: 15.w, top: 15.h),
                 child: ListView.separated(
@@ -47,7 +55,8 @@ class _ListMyQRScreenState extends State<ListMyQRScreen> {
                     String qrName = data.name;
                     String qrCode = data.qrCode;
                     String qrID = data.id;
-                    String createdDate = DateFormat('yyyy-MM-dd HH:mm:ss').format(data.createdAt);
+                    String createdDate = DateFormat('yyyy-MM-dd HH:mm:ss')
+                        .format(data.createdAt);
                     return GestureDetector(
                       onTap: () {
                         Navigator.pushNamed(context, AppRoutes.myQR,

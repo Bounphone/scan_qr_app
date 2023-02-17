@@ -25,7 +25,8 @@ class _CreateQRScreenState extends State<CreateQRScreen> {
       Marker(markerId: MarkerId("marker_1"), position: _center),
       Marker(
         markerId: MarkerId("marker_2"),
-        position: LatLng(18.997962200185533, 72.8379758747611),
+        
+        position: LatLng(17.900026, 102.642340),
       ),
     };
   }

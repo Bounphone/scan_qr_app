@@ -89,7 +89,8 @@ class ProfileScreen extends StatelessWidget {
                             textAlign: TextAlign.center,
                           ),
                         ),
-                        btnOkOnPress: () {
+                        btnOkOnPress: () async {
+                          await context.read<AuthVM>().onLogout();
                           Navigator.pushNamedAndRemoveUntil(
                               context, AppRoutes.login, (route) => false);
                         },

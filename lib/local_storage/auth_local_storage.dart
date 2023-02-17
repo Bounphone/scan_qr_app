@@ -26,4 +26,15 @@ class AuthLocalStorage {
       rethrow;
     }
   }
+
+  Future<void> clearBox() async {
+    try {
+      final box = await Hive.openBox(boxName);
+      await box.clear();
+      await box.close();
+      await Hive.deleteBoxFromDisk(boxName);
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

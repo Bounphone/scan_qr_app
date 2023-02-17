@@ -73,8 +73,8 @@ class SignUpScreen extends StatelessWidget {
                 CustomFormField(
                   hintText: 'ລະຫັດຜ່ານ',
                   validator: (val) {
-                    if (!val!.isValidPassword)
-                      return 'ລະຫັດຂອງທ່ານຄວນມີ 6 ຕົວອັກສອນຂຶ້ນໄປ';
+                    if (val!.length < 8)
+                      return 'ລະຫັດຂອງທ່ານຄວນມີ 8 ຕົວອັກສອນຂຶ້ນໄປ';
                     return null;
                   },
                   controller: password,
