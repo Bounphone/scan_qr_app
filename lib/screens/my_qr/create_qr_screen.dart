@@ -57,32 +57,23 @@ class _CreateQRScreenState extends State<CreateQRScreen> {
             SizedBox(
               height: 20.h,
             ),
-            Row(
-              children: [
-                Expanded(child: Text('ທ່ານຕ້ອງການລະບຸຕຳແໜ່ງຂອງ QR ຫຼື ບໍ?')),
-                SizedBox(
-                  width: 15.w,
-                ),
-                Switch(
-                  value: isOpenLocation,
-                  onChanged: (value) {
-                    setState(() {
-                      isOpenLocation = value;
-                    });
-                  },
-                ),
-              ],
-            ),
-            if (isOpenLocation)
-              Expanded(
-                child: GoogleMap(
-                  onMapCreated: _onMapCreated,
-                  initialCameraPosition: CameraPosition(
-                    target: _center,
-                    zoom: 20.0,
-                  ),
-                ),
-              ),
+            // Row(
+            //   children: [
+            //     Expanded(child: Text('ທ່ານຕ້ອງການລະບຸຕຳແໜ່ງຂອງ QR ຫຼື ບໍ?')),
+            //     SizedBox(
+            //       width: 15.w,
+            //     ),
+            //     Switch(
+            //       value: isOpenLocation,
+            //       onChanged: (value) {
+            //         setState(() {
+            //           isOpenLocation = value;
+            //         });
+            //       },
+            //     ),
+            //   ],
+            // ),
+
           ]),
         ),
       ),
@@ -103,7 +94,7 @@ class _CreateQRScreenState extends State<CreateQRScreen> {
                 }
                 context
                     .read<MyQRVM>()
-                    .onCreateQR(qrName.text.trim(), lat, long, context);
+                    .onCreateQR(qrName.text.trim(), 0, 0, context);
               }
             },
             child: Text('ສ້າງ QR'),

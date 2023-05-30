@@ -26,11 +26,13 @@ class AuthService {
         "email": email,
         "password": password
       });
+      print('${payload} \n ${url}');
       Response response = await dio.post(url,
           data: payload,
           options: Options(headers: {'Content-Type': 'application/json'}));
       return authModelFromJson(jsonEncode(response.data));
     } catch (e) {
+
       rethrow;
     }
   }
