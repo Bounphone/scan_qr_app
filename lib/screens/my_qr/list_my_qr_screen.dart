@@ -60,7 +60,7 @@ class _ListMyQRScreenState extends State<ListMyQRScreen> {
                     return GestureDetector(
                       onTap: () {
                         Navigator.pushNamed(context, AppRoutes.myQR,
-                            arguments: MyQRArg(name: qrName, qrCode: qrCode));
+                            arguments: MyQRArg(name: qrName, qrCode: qrCode, id: qrID));
                       },
                       child: Container(
                         margin: EdgeInsets.symmetric(vertical: 10.h),

@@ -28,7 +28,8 @@ class CheckInVM extends ChangeNotifier {
         String userID = accessTokenModel.id;
         String checkInDate =
             DateFormat('yyyy-MM-ddTHH:mm:ss').format(DateTime.now());
-        String qrID = '1';
+
+        String qrID = qrSplited.last;
         String qrName = qrSplited[2];
         LocationData locationData = await getLocation();
         double lat = locationData.latitude ?? 0;

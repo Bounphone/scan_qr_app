@@ -10,6 +10,8 @@ class MyQRScreen extends StatelessWidget {
     final args = ModalRoute.of(context)!.settings.arguments as MyQRArg;
     String name = args.name;
     String qrCode = args.qrCode;
+    String qrId = args.id;
+    String code = '$qrCode/$qrId';
     return Scaffold(
       appBar: AppBar(
         title: Text('My QR Code'),
@@ -36,7 +38,7 @@ class MyQRScreen extends StatelessWidget {
                 height: 60.h,
               ),
               QrImage(
-                data: qrCode,
+                data: code,
                 version: QrVersions.auto,
                 size: MediaQuery.of(context).size.width * 0.7,
               ),
@@ -52,7 +54,7 @@ class MyQRScreen extends StatelessWidget {
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(15.r))),
                   onPressed: () {
-                    Clipboard.setData(ClipboardData(text: qrCode));
+                    Clipboard.setData(ClipboardData(text: code));
                   },
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
